@@ -1,0 +1,30 @@
+html {
+	margin: 0px;
+	padding: 0px;
+}
+
+
+body{
+	margin: 0;
+	font-family: sans-serif;
+	background: #A9CCE3;
+	font-family: sans-serif;
+}
+ .boxlogin {
+	margin: 100px auto;
+	width: 320px;
+	border-radius: 4px;
+	border-radius: 7px;
+	background: #D4E6F1;
+}
+h1, h2 {
+	text-align: center;
+	font-family: sans-serif;
+	background: fixed;
+	color: #fff;
+}
+
+.col-sm-10 {
+	padding: 5px;
+	width: 100%;
+}

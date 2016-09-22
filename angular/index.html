@@ -1,0 +1,56 @@
+<!doctype html>
+
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Usuarios</title>
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="estilos.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+<h1>Registrate<span class="label label-success"></span></h1>
+	<div class="jumbotron boxlogin">
+	<form action="/" class="form-horizontal">
+		<h2 class="form_titulo">CREA UNA CUENTA</h2>
+		<div class="form-group">
+			<div class="col-sm-10">
+			<input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" class="form-control input-lg text-center" ng-model="newPersona.nombre" required>
+
+			</div>
+			
+			
+			<div class="col-sm-10">
+			<input type="text" id="email" name="email" placeholder="Email" class="form-control input-lg text-center" ng-model="newPersona.email" required>
+
+			</div>
+			<div class="col-sm-10">
+			<input type="text" id="usuario" name="usuario" placeholder="Usuario" class="form-control input-lg text-center" ng-model="newPersona.usuario" required>
+
+			</div>
+			<div class="col-sm-10">
+			<input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" class="form-control input-lg text-center" required>
+
+			</div>
+			<div class="col-sm-10">
+			<input type="password" id="confirm_contra" name="confirm_contra" placeholder="Confirmar la contraseña" class="form-control input-lg text-center" required>
+
+			</div>
+			<div class="col-sm-10">
+			<a href="login.html" class="btn btn-primary" ng-click="registrarPersona()" ng-disabled="myForm.$invalid || selected">Registrate</a>
+			</div>
+		</div>
+		</form>
+
+
+
+		</div>
+
+</body>
+</html>

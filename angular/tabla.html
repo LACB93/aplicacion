@@ -1,0 +1,67 @@
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Usuarios</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="login.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+
+	<div class="container">
+
+		<div class="jumbotron text-center" ng-prueba>
+			<h1>Nº de Registros: <span class="label label-success">{{ personas.length }}</span></h1>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-1">
+				<table class="table table-striped">
+					<tr class="info">
+						<td class="colum">Nombre</td>
+						<td class="colum">Usuario</td>
+						<td class="colum">Email</td>
+					</tr>
+					<tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+						<td class="columna">{{ persona.nombre }}</td>
+						<td class="columna">{{ persona.usuario }}</td>
+						<td class="columna">{{ persona.email }}</td>
+					</tr>
+				</table>
+			</div>
+			
+
+							<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form name="myForm">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newPersona.nombre" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Usuario" ng-model="newPersona.usuario" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" required>
+						<br>
+						<!--<input type="password" class="form-control input-lg text-center" placeholder="Contraseña"required>-->
+
+
+					</div>
+					
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Borrar</button>
+					<div>
+					<br>
+					<p>Ir a la pàgina de <a href="index.html">registro</a></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
