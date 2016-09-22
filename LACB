@@ -574,6 +574,30 @@ Al formulario no se le hizo una validación muy exhaustiva pero AngulaJS nos per
 
 ```
 
+###Poner en funcionamiento el proyecto
+
+**npm install**: Se tiene que ejecutar este comando en la carpeta del proyecto para que se descargue las librerías de express y mongose, o sea, las dependencias del proyecto (si hay algún problema se puede intentar como “sudo”). 
+
+```
+npm install
+```
+
+**node server.js**: En la carpeta del proyecto se tiene que ejecutar este comando. Este comando es para poner a correr el servidor y que el proyecto funcione.
+
+```
+node server.js
+```
+
+**http://localhost:3000**: Se puede ver la aplicación web yendo al navegador y poniendo la URL de la máquina local donde este el proyecto y el puerto.
+
+```
+http://localhost:3000
+```
+ 
+
+
+
+
 
 
 
