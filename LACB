@@ -1,599 +1,617 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hello!</title>
-<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
-<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
-</head>
-<body><div class="container"><h1 id="aplicación-utilizando-meanmongo-express-angular-node">Aplicación utilizando MEAN(Mongo-Express-Angular-Node)</h1>
+Aplicación utilizando MEAN(Mongo-Express-Angular-Node)
+===================
 
-<p>Aquí se muestra como desarrollar una aplicación web con MEAN(Mongo-Express-Angular-Node) </p>
+Aquí se muestra como desarrollar una aplicación web con MEAN(Mongo-Express-Angular-Node) 
 
-<hr>
+----------
 
 
+MEAN
+-------------
+MEAN utiliza las tecnologías de MongoDB, Express, AngularJS y NodeJS para hacer aplicaciones web y utilizan el mismo lenguaje de programación, **Javascript**. 
 
-<h2 id="mean">MEAN</h2>
+Este tipo de aplicaciones consiste en desarrollar una **API REST con NodeJS y Express** y esta API puede hacer un **CRUD** (**C** reate - **R** ead - **U** pload - **D** elete) a la base de datos de **MongoDB**. Con este API se comunicará **AngularJS (que es el Frontend)** haciendo peticiones (Get, Post, Put y Delete) cuyos datos se actualizaran en la aplicación. 
 
-<p>MEAN utiliza las tecnologías de MongoDB, Express, AngularJS y NodeJS para hacer aplicaciones web y utilizan el mismo lenguaje de programación, <strong>Javascript</strong>. </p>
+```sequence
 
-<p>Este tipo de aplicaciones consiste en desarrollar una <strong>API REST con NodeJS y Express</strong> y esta API puede hacer un <strong>CRUD</strong> (<strong>C</strong> reate - <strong>R</strong> ead - <strong>U</strong> pload - <strong>D</strong> elete) a la base de datos de <strong>MongoDB</strong>. Con este API se comunicará <strong>AngularJS (que es el Frontend)</strong> haciendo peticiones (Get, Post, Put y Delete) cuyos datos se actualizaran en la aplicación. </p>
+Note right of MongoDB: Base de Datos
+MongoDB-> Node + Express: respuesta de la base de datos 
+Note right of Node + Express: API REST
+Node + Express->MongoDB: consulta a la base de datos
+Note right of AngularJS:FRONTEND
+Node + Express-> AngularJS: devuelve un objeto en json
+AngularJS-> Node + Express: llamada al API
 
+```
+Esta es un aplicación web que consistirá en hacer **CRUD** de objetos "Persona" a tráves de un formulario y una tabla para visualizarlos. En esta aplicación se hacen las 4 peticiones al API **(Get, Post, Put y Delete)** y el CRUD en la base de datos. En las siguientes imágenes vemos lo que hará la aplicación; y será hacer un "Read" de todos los objetos "Persona" que hay en la base de datos para mostrarlos en la tabla. Podrá "Registrar" ("Create") un objeto "Persona" a tráves del formulario de registro y una vez que seleccionemos un objeto de la tabla, lo rellenará en el formulario que esta a lado derecho de  la tabla y lo podremos "Modificar" ("Update") o "Borrar" ("Delete") y en los archivos HTML se validaran los formularios de Registro y Login con AngularJS.
 
+![enter image description here](https://lh3.googleusercontent.com/-76BlaWAzElU/V-QABlObXBI/AAAAAAAAAgk/Lf1QyGZKIvcrR60sdyDFIWIXrEd6dAxtACLcB/s0/Captura+de+pantalla+2016-09-22+a+las+10.59.47+a.m..png "form registro")
 
-<div class="sequence-diagram"><svg height="423.90625" version="1.1" width="680.6953125" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.5px; top: -0.0625px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><path stroke-linecap="round" d="M5,0 0,2.5 5,5z" id="raphael-marker-block" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><marker id="raphael-marker-endblock55-obj36" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj42" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj48" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker><marker id="raphael-marker-endblock55-obj51" markerHeight="5" markerWidth="5" orient="auto" refX="2.5" refY="2.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#raphael-marker-block" transform="rotate(180 2.5 2.5) scale(1,1)" stroke-width="1.0000" fill="#000" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></use></marker></defs><rect x="10" y="20" width="86.6875" height="37.3125" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="19.984375" y="30" width="66.6875" height="17.3125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="53.34375" y="38.65625" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.34375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">MongoDB</tspan></text><rect x="10" y="366.59375" width="86.6875" height="37.3125" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="19.984375" y="376.59375" width="66.6875" height="17.3125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="53.34375" y="385.25" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.34375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">MongoDB</tspan></text><path fill="none" stroke="#000000" d="M53.34375,57.3125L53.34375,366.59375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="210.75" y="20" width="127.125" height="37.3125" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="220.734375" y="30.09375" width="107.125" height="17.125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="274.3125" y="38.65625" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.4375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Node + Express</tspan></text><rect x="210.75" y="366.59375" width="127.125" height="37.3125" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="220.734375" y="376.6875" width="107.125" height="17.125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="274.3125" y="385.25" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.4375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Node + Express</tspan></text><path fill="none" stroke="#000000" d="M274.3125,57.3125L274.3125,366.59375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="428.1796875" y="20" width="89.203125" height="37.3125" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="438.171875" y="30" width="69.203125" height="17.3125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="472.78125" y="38.65625" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.34375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">AngularJS</tspan></text><rect x="428.1796875" y="366.59375" width="89.203125" height="37.3125" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="438.171875" y="376.59375" width="69.203125" height="17.3125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="472.78125" y="385.25" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.34375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">AngularJS</tspan></text><path fill="none" stroke="#000000" d="M472.78125,57.3125L472.78125,366.59375" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="73.34375" y="77.3125" width="108.390625" height="27" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="78.328125" y="82.3125" width="98.390625" height="17" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="127.5390625" y="90.8125" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Base de Datos</tspan></text><rect x="63.328125" y="120.75" width="200.96875" height="17.125" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="163.828125" y="129.3125" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.4375" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">respuesta de la base de datos</tspan></text><path fill="none" stroke="#000000" d="M53.34375,141.4375C53.34375,141.4375,236.48902964405715,141.4375,269.3085206740225,141.4375" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj36)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="294.3125" y="161.4375" width="78.34375" height="27" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="299.296875" y="166.4375" width="68.34375" height="17" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="333.484375" y="174.9375" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">API REST</tspan></text><rect x="72.5" y="204.9375" width="182.625" height="17" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="163.828125" y="213.4375" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">consulta a la base de datos</tspan></text><path fill="none" stroke="#000000" d="M274.3125,225.4375C274.3125,225.4375,91.16722035594285,225.4375,58.347729325977525,225.4375" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj42)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="492.78125" y="245.4375" width="93.3125" height="27" rx="0" ry="0" fill="none" stroke="#000000" stroke-width="2" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><rect x="497.765625" y="250.4375" width="83.3125" height="17" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="539.4375" y="258.9375" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">FRONTEND</tspan></text><rect x="284.296875" y="288.859375" width="178.46875" height="17.15625" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="373.546875" y="297.4375" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.421875" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">devuelve un objeto en json</tspan></text><path fill="none" stroke="#000000" d="M274.3125,309.59375C274.3125,309.59375,436.9616093337536,309.59375,467.77599137549987,309.59375" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj48)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><rect x="325.1875" y="326.09375" width="96.703125" height="17" rx="0" ry="0" fill="#ffffff" stroke="none" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></rect><text x="373.546875" y="334.59375" text-anchor="middle" font-family="Andale Mono, monospace" font-size="16px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: &quot;Andale Mono&quot;, monospace; font-size: 16px;"><tspan dy="5.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">llamada al API</tspan></text><path fill="none" stroke="#000000" d="M472.78125,346.59375C472.78125,346.59375,310.1321406662464,346.59375,279.31775862450013,346.59375" stroke-width="2" marker-end="url(#raphael-marker-endblock55-obj51)" stroke-dasharray="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path></svg></div>
+![enter image description here](https://lh3.googleusercontent.com/-KzK3opqjHMA/V-QAOOqGKrI/AAAAAAAAAgs/OhZ3Ph7lNDY4XrSEXAFF7akzfOJLo2cGQCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.00.40+a.m..png "form login")
 
-<p>Esta es un aplicación web que consistirá en hacer <strong>CRUD</strong> de objetos “Persona” a tráves de un formulario y una tabla para visualizarlos. En esta aplicación se hacen las 4 peticiones al API <strong>(Get, Post, Put y Delete)</strong> y el CRUD en la base de datos. En las siguientes imágenes vemos lo que hará la aplicación; y será hacer un “Read” de todos los objetos “Persona” que hay en la base de datos para mostrarlos en la tabla. Podrá “Registrar” (“Create”) un objeto “Persona” a tráves del formulario de registro y una vez que seleccionemos un objeto de la tabla, lo rellenará en el formulario que esta a lado derecho de  la tabla y lo podremos “Modificar” (“Update”) o “Borrar” (“Delete”) y en los archivos HTML se validaran los formularios de Registro y Login con AngularJS.</p>
-
-<p><img src="https://lh3.googleusercontent.com/-76BlaWAzElU/V-QABlObXBI/AAAAAAAAAgk/Lf1QyGZKIvcrR60sdyDFIWIXrEd6dAxtACLcB/s0/Captura+de+pantalla+2016-09-22+a+las+10.59.47+a.m..png" alt="enter image description here" title="form registro"></p>
-
-<p><img src="https://lh3.googleusercontent.com/-KzK3opqjHMA/V-QAOOqGKrI/AAAAAAAAAgs/OhZ3Ph7lNDY4XrSEXAFF7akzfOJLo2cGQCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.00.40+a.m..png" alt="enter image description here" title="form login"></p>
-
-<p><img src="https://lh3.googleusercontent.com/-4I5PQuq1UWI/V-QBYriV13I/AAAAAAAAAhE/yidW__vBT5EmHrfJNrYOOuQcDNGZd2KAwCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.05.32+a.m..png" alt="enter image description here" title="tabla"></p>
-
-<hr>
-
-<p>En la siguiente imagen vemos cual va a ser la estructura del proyecto que se desarrolla.</p>
-
-<p><img src="https://lh3.googleusercontent.com/-APr4Gg1mVFA/V-QDVh0XkCI/AAAAAAAAAhQ/TNKxo7rJ6t4XnzbBYjZtrP_beMpeM6c8gCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.13.48+a.m..png" alt="enter image description here" title="folder"></p>
-
-<p>Se debe tener instalado <strong>NodeJS, Express y MongoDB</strong> en el entorno de desarrollo. En ella hay una carpeta “angular” que tiene los ficheros del frontend (“index.html, login.html y tabla.html” ), los estilos css y el archivo que hará las llamadas al API  (“core.js”).</p>
-
-<p>En la carpeta “app” vamos a tener el API  que esta hecho con NodeJS y Express. En esta carpeta tendremos el archivo “persona.js” en la que tenemos definido el modelo del objeto “Persona” y las rutas de la API. Dentro del “controller.js” están las funciones que se ejecutan al llamar a cada ruta.</p>
-
-<p>Por último tenemos los ficheros “package.json” para ver las dependencias que se necesitaran y luego el fichero “server.js” en el que estará la configuración del servidor. </p>
+![enter image description here](https://lh3.googleusercontent.com/-4I5PQuq1UWI/V-QBYriV13I/AAAAAAAAAhE/yidW__vBT5EmHrfJNrYOOuQcDNGZd2KAwCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.05.32+a.m..png "tabla")
 
 
+----------
 
-<h3 id="código-fuente-de-los-archivos">Código fuente de los archivos:</h3>
+En la siguiente imagen vemos cual va a ser la estructura del proyecto que se desarrolla.
 
-<p>Aquí esta el “package.json” que es la información relacionada con el proyecto y nos da las dependencias que vamos a necesitar para el proyecto. las dependencias que se necesitan son las librerías de <strong>“mongoose”</strong> y <strong>“express”</strong>. <strong>“mongoose”</strong> nos permitirá definir el modelo de datos que se guardará en MongoDB. También tiene un repositorio de Git. El código de package es el siguiente:</p>
-
-<pre class="prettyprint"><code class=" hljs json">{
-  "<span class="hljs-attribute">name</span>": <span class="hljs-value"><span class="hljs-string">"aplicacion"</span></span>,
-  "<span class="hljs-attribute">version</span>": <span class="hljs-value"><span class="hljs-string">"1.0.0"</span></span>,
-  "<span class="hljs-attribute">description</span>": <span class="hljs-value"><span class="hljs-string">"app"</span></span>,
-  "<span class="hljs-attribute">main</span>": <span class="hljs-value"><span class="hljs-string">"server.js"</span></span>,
-  "<span class="hljs-attribute">dependencies</span>": <span class="hljs-value">{
-     "<span class="hljs-attribute">express</span>": <span class="hljs-value"><span class="hljs-string">"~3.4.4"</span></span>,
-    "<span class="hljs-attribute">mongoose</span>": <span class="hljs-value"><span class="hljs-string">"~3.6.2"</span>
-    </span>}</span>,
-  "<span class="hljs-attribute">devDependencies</span>": <span class="hljs-value">{}</span>,
-  "<span class="hljs-attribute">scripts</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">test</span>": <span class="hljs-value"><span class="hljs-string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span>,
-    "<span class="hljs-attribute">start</span>": <span class="hljs-value"><span class="hljs-string">"node server.js"</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">repository</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">type</span>": <span class="hljs-value"><span class="hljs-string">"git"</span></span>,
-    "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"git+https://github.com/LACB93/aplicacion.git"</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">author</span>": <span class="hljs-value"><span class="hljs-string">"lcruz@next-cloud.mx"</span></span>,
-  "<span class="hljs-attribute">license</span>": <span class="hljs-value"><span class="hljs-string">"ISC"</span></span>,
-  "<span class="hljs-attribute">bugs</span>": <span class="hljs-value">{
-    "<span class="hljs-attribute">url</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/LACB93/aplicacion/issues"</span>
-  </span>}</span>,
-  "<span class="hljs-attribute">homepage</span>": <span class="hljs-value"><span class="hljs-string">"https://github.com/LACB93/aplicacion#readme"</span>
-</span>}
-</code></pre>
-
-<p>El siguiente archivo es el <strong>“server.js”</strong> en el cual configuraremos el servidor. En el vamos a definir que librereías utilizaremos <strong>(express y mongoose)</strong> y el puerto por el que escuchara la aplicación. El puerto definido es el 3000. También esta la conexión a la base de datos Mongo <strong>(‘mongodb://localhost:27017/usua_reg’)</strong>  y cargaremos las rutas de la aplicación en el archivo <strong>(“routes.js”)</strong>.</p>
-
-<pre class="prettyprint"><code class=" hljs php"><span class="hljs-keyword">var</span> express  = <span class="hljs-keyword">require</span>(<span class="hljs-string">'express'</span>);
-<span class="hljs-keyword">var</span> app      = express();  <span class="hljs-comment">// Utilizamos express</span>
-<span class="hljs-keyword">var</span> mongoose = <span class="hljs-keyword">require</span>(<span class="hljs-string">'mongoose'</span>); <span class="hljs-comment">// mongoose para mongodb</span>
-<span class="hljs-keyword">var</span> port     = process.env.PORT || <span class="hljs-number">3000</span>; <span class="hljs-comment">// Escuchará en el puerto 3000</span>
+![enter image description here](https://lh3.googleusercontent.com/-APr4Gg1mVFA/V-QDVh0XkCI/AAAAAAAAAhQ/TNKxo7rJ6t4XnzbBYjZtrP_beMpeM6c8gCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.13.48+a.m..png "folder")
 
 
-mongoose.connect(<span class="hljs-string">'mongodb://localhost:27017/usua_reg'</span>); <span class="hljs-comment">// Se hace la conexión a la base de datos de Mongo con nombre "usua_reg"</span>
+Se debe tener instalado **NodeJS, Express y MongoDB** en el entorno de desarrollo. En ella hay una carpeta “angular” que tiene los ficheros del frontend (“index.html, login.html y tabla.html” ), los estilos css y el archivo que hará las llamadas al API  (“core.js”).
+
+En la carpeta “app” vamos a tener el API  que esta hecho con NodeJS y Express. En esta carpeta tendremos el archivo “persona.js” en la que tenemos definido el modelo del objeto “Persona” y las rutas de la API. Dentro del “controller.js” están las funciones que se ejecutan al llamar a cada ruta.
+
+Por último tenemos los ficheros “package.json” para ver las dependencias que se necesitaran y luego el fichero “server.js” en el que estará la configuración del servidor. 
+
+###Código fuente de los archivos:
+
+Aquí esta el “package.json” que es la información relacionada con el proyecto y nos da las dependencias que vamos a necesitar para el proyecto. las dependencias que se necesitan son las librerías de **“mongoose”** y **“express”**. **“mongoose”** nos permitirá definir el modelo de datos que se guardará en MongoDB. También tiene un repositorio de Git. El código de package es el siguiente:
+
+```
+{
+  "name": "aplicacion",
+  "version": "1.0.0",
+  "description": "app",
+  "main": "server.js",
+  "dependencies": {
+     "express": "~3.4.4",
+    "mongoose": "~3.6.2"
+    },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LACB93/aplicacion.git"
+  },
+  "author": "lcruz@next-cloud.mx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LACB93/aplicacion/issues"
+  },
+  "homepage": "https://github.com/LACB93/aplicacion#readme"
+}
+
+```
+
+El siguiente archivo es el **“server.js”** en el cual configuraremos el servidor. En el vamos a definir que librereías utilizaremos **(express y mongoose)** y el puerto por el que escuchara la aplicación. El puerto definido es el 3000. También esta la conexión a la base de datos Mongo **('mongodb://localhost:27017/usua_reg')**  y cargaremos las rutas de la aplicación en el archivo **(“routes.js”)**.
+
+```
+var express  = require('express');
+var app      = express();  // Utilizamos express
+var mongoose = require('mongoose'); // mongoose para mongodb
+var port  	 = process.env.PORT || 3000; // Escuchará en el puerto 3000
 
 
-app.configure(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-    app.<span class="hljs-keyword">use</span>(express.<span class="hljs-keyword">static</span>(__dirname + <span class="hljs-string">'/angular'</span>));
-    app.<span class="hljs-keyword">use</span>(express.logger(<span class="hljs-string">'dev'</span>));
-    app.<span class="hljs-keyword">use</span>(express.bodyParser());
-    app.<span class="hljs-keyword">use</span>(express.methodOverride());
+mongoose.connect('mongodb://localhost:27017/usua_reg'); // Se hace la conexión a la base de datos de Mongo con nombre "usua_reg"
+
+
+app.configure(function() {
+	app.use(express.static(__dirname + '/angular'));
+	app.use(express.logger('dev'));
+	app.use(express.bodyParser());
+	app.use(express.methodOverride());
 });
 
-<span class="hljs-comment">//app.get('angular/registro.html', function(req,res){</span>
-<span class="hljs-comment">//      res.sendfile('registro');</span>
-<span class="hljs-comment">//  })</span>
+//app.get('angular/registro.html', function(req,res){
+//		res.sendfile('registro');
+//	})
 
-<span class="hljs-keyword">require</span>(<span class="hljs-string">'./app/routes.js'</span>)(app);
+require('./app/routes.js')(app);
 
 
 app.listen(port);
-console.log(<span class="hljs-string">"APP por el puerto "</span> + port);
-</code></pre>
+console.log("APP por el puerto " + port);
 
-<p>Para el API con NodeJS se mostrará el modelo de datos que se utiliza. Eso esta en el archivo “persona.js” y esta definido un modelo con nombre, usuario y email que son todos un String. Su código es el siguiente:</p>
+```
 
+Para el API con NodeJS se mostrará el modelo de datos que se utiliza. Eso esta en el archivo “persona.js” y esta definido un modelo con nombre, usuario y email que son todos un String. Su código es el siguiente:
 
+```
+var mongoose = require('mongoose');
 
-<pre class="prettyprint"><code class=" hljs javascript"><span class="hljs-keyword">var</span> mongoose = <span class="hljs-built_in">require</span>(<span class="hljs-string">'mongoose'</span>);
+module.exports = mongoose.model('Persona', {
+	nombre: String,
+	usuario: String,
+	email: String
+});
+```
 
-module.exports = mongoose.model(<span class="hljs-string">'Persona'</span>, {
-    nombre: <span class="hljs-built_in">String</span>,
-    usuario: <span class="hljs-built_in">String</span>,
-    email: <span class="hljs-built_in">String</span>
-});</code></pre>
+En el archivo “routes.js” se definen las rutas de la API y sus acciones con los 4 tipos de llamadas (Get, Post, Put y Delete):
 
-<p>En el archivo “routes.js” se definen las rutas de la API y sus acciones con los 4 tipos de llamadas (Get, Post, Put y Delete):</p>
+```
+var Persona = require('./modelo/persona');
+var Controller = require ('./controller');
 
+module.exports = function(app) {
 
-
-<pre class="prettyprint"><code class=" hljs actionscript"><span class="hljs-keyword">var</span> Persona = require(<span class="hljs-string">'./modelo/persona'</span>);
-<span class="hljs-keyword">var</span> Controller = require (<span class="hljs-string">'./controller'</span>);
-
-module.exports = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(app)</span> {</span>
-
-    <span class="hljs-comment">// Devuelve todas las personas</span>
-    app.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/api/persona'</span>, Controller.getPersona);
-
-    <span class="hljs-comment">// Crea una nueva persona</span>
-    app.post(<span class="hljs-string">'/api/persona'</span>, Controller.setPersona);
-
-    <span class="hljs-comment">// Modifica los datos de una persona</span>
-    app.put(<span class="hljs-string">'/api/persona/:persona_id'</span>, Controller.updatePersona);
-
-    <span class="hljs-comment">// Borra a una persona</span>
-    app.<span class="hljs-keyword">delete</span>(<span class="hljs-string">'/api/persona/:persona_id'</span>, Controller.removePersona);
-
-
-    <span class="hljs-comment">// formularios</span>
-    app.<span class="hljs-keyword">get</span>(<span class="hljs-string">'/'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span> {</span>
-        res.sendfile(<span class="hljs-string">'./angular/login.html'</span>);
-    });
-
-    app.<span class="hljs-keyword">get</span>(<span class="hljs-string">'./angular/login.html'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span> {</span>
-        res.sendfile(<span class="hljs-string">'./angular/tabla.html'</span>);
-    });
-};</code></pre>
-
-<p>En el archivo <strong>“controller.js”</strong> escribimos las funciones de cada llamada de la API: </p>
+	// Devuelve todas las personas
+	app.get('/api/persona', Controller.getPersona);
+	
+	// Crea una nueva persona
+	app.post('/api/persona', Controller.setPersona);
+	
+	// Modifica los datos de una persona
+	app.put('/api/persona/:persona_id', Controller.updatePersona);
+	
+	// Borra a una persona
+	app.delete('/api/persona/:persona_id', Controller.removePersona);
 
 
+	// formularios
+	app.get('/', function(req, res) {
+		res.sendfile('./angular/login.html');
+	});
 
-<pre class="prettyprint"><code class=" hljs php"><span class="hljs-keyword">var</span> Persona = <span class="hljs-keyword">require</span>(<span class="hljs-string">'./modelo/persona'</span>);
+	app.get('./angular/login.html', function(req, res) {
+		res.sendfile('./angular/tabla.html');
+	});
+};
+```
+
+En el archivo **“controller.js”** escribimos las funciones de cada llamada de la API: 
+
+```
+var Persona = require('./modelo/persona');
 
 
-<span class="hljs-comment">// Obtiene todos los objetos Persona de la base de datos</span>
-exports.getPersona = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(req, res)</span>{</span>
-    Persona.find(
-        <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-            <span class="hljs-keyword">if</span> (err)
-                res.send(err)
-                    res.json(persona); <span class="hljs-comment">// devuelve todas las Personas en JSON</span>
-                }
-            );
+// Obtiene todos los objetos Persona de la base de datos
+exports.getPersona = function (req, res){
+	Persona.find(
+		function(err, persona) {
+			if (err)
+				res.send(err)
+					res.json(persona); // devuelve todas las Personas en JSON
+				}
+			);
 }
 
-<span class="hljs-comment">// Guarda un objeto Persona en base de datos</span>
-exports.setPersona = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span> {</span>
+// Guarda un objeto Persona en base de datos
+exports.setPersona = function(req, res) {
 
-        <span class="hljs-comment">// Se crea el objeto Persona</span>
-        Persona.create(
-            {nombre : req.body.nombre,  usuario: req.body.usuario, email: req.body.email},
-            <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-                <span class="hljs-keyword">if</span> (err)
-                    res.send(err);
+		// Se crea el objeto Persona
+		Persona.create(
+			{nombre : req.body.nombre,	usuario: req.body.usuario, email: req.body.email},
+			function(err, persona) {
+				if (err)
+					res.send(err);
 
-                <span class="hljs-comment">// Obtine y devuelve todas las personas</span>
-                Persona.find(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-                    <span class="hljs-keyword">if</span> (err)
-                        res.send(err)
-                    res.json(persona);
-                });
-            });
+				// Obtine y devuelve todas las personas
+				Persona.find(function(err, persona) {
+				 	if (err)
+				 		res.send(err)
+				 	res.json(persona);
+				});
+			});
 
-    }
+	}
 
-<span class="hljs-comment">// Se modifica un objeto Persona de la base de datos</span>
-exports.updatePersona = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span>{</span>
-    Persona.update( {_id : req.params.persona_id},
-                    {<span class="hljs-variable">$set</span>:{nombre : req.body.nombre,   usuario: req.body.usuario, email: req.body.email}},
-                    <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-                        <span class="hljs-keyword">if</span> (err)
-                            res.send(err);
+// Se modifica un objeto Persona de la base de datos
+exports.updatePersona = function(req, res){
+	Persona.update( {_id : req.params.persona_id},
+					{$set:{nombre : req.body.nombre,	usuario: req.body.usuario, email: req.body.email}},
+					function(err, persona) {
+						if (err)
+							res.send(err);
 
-                <span class="hljs-comment">// Obtine y devuelve todas las personas</span>
-                Persona.find(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-                    <span class="hljs-keyword">if</span> (err)
-                        res.send(err)
-                    res.json(persona);
-                });
-            });
-    }
+				// Obtine y devuelve todas las personas
+				Persona.find(function(err, persona) {
+				 	if (err)
+				 		res.send(err)
+				 	res.json(persona);
+				});
+			});
+	}
 
-<span class="hljs-comment">// Se elimina un objeto Persona de la base de Datos</span>
-exports.removePersona = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(req, res)</span> {</span>
-    Persona.remove({_id : req.params.persona_id}, <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-        <span class="hljs-keyword">if</span> (err)
-            res.send(err);
+// Se elimina un objeto Persona de la base de Datos
+exports.removePersona = function(req, res) {
+	Persona.remove({_id : req.params.persona_id}, function(err, persona) {
+		if (err)
+			res.send(err);
 
-            <span class="hljs-comment">// Obtine y devuelve todas las personas tras borrar a una de ellas</span>
-            Persona.find(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(err, persona)</span> {</span>
-                <span class="hljs-keyword">if</span> (err)
-                    res.send(err)
-                res.json(persona);
-            });
-        });
-}</code></pre>
+			// Obtine y devuelve todas las personas tras borrar a una de ellas
+			Persona.find(function(err, persona) {
+				if (err)
+					res.send(err)
+				res.json(persona);
+			});
+		});
+}
+```
 
-<p>Ya se tiene API con NodeJS desarrollado y se tiene que unirlo con AngularJS <strong>(frontend)</strong>.</p>
+Ya se tiene API con NodeJS desarrollado y se tiene que unirlo con AngularJS **(frontend)**.
 
-<p>Dentro de Angular tenemos los archivos “core.js” e “index.html”, “login.html” y “tabla.html”. El archivo “core.js” hace la peticiones al API y de tener actualizados los modelos de datos para que los muestre la aplicación. El código del archivo “core.js” es el siguiente:</p>
+Dentro de Angular tenemos los archivos “core.js” e “index.html”, "login.html" y "tabla.html". El archivo “core.js” hace la peticiones al API y de tener actualizados los modelos de datos para que los muestre la aplicación. El código del archivo “core.js” es el siguiente:
 
-
-
-<pre class="prettyprint"><code class=" hljs php">angular.module(<span class="hljs-string">'MainApp'</span>, [])
-
-
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mainController</span><span class="hljs-params">(<span class="hljs-variable">$scope</span>, <span class="hljs-variable">$http</span>)</span> {</span>
-    <span class="hljs-variable">$scope</span>.newPersona = {};
-    <span class="hljs-variable">$scope</span>.personas = {};
-    <span class="hljs-variable">$scope</span>.selected = <span class="hljs-keyword">false</span>;
-
-    <span class="hljs-comment">// Se obtienen todos los datos de la base de datos</span>
-    <span class="hljs-variable">$http</span>.get(<span class="hljs-string">'/api/persona'</span>).success(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-        <span class="hljs-variable">$scope</span>.personas = data;
-    })
-    .error(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-        console.log(<span class="hljs-string">'Error: '</span> + data);
-    });
-
-    <span class="hljs-comment">// Función para registrar a una persona</span>
-    <span class="hljs-variable">$scope</span>.registrarPersona = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> {</span>
-        <span class="hljs-variable">$http</span>.post(<span class="hljs-string">'/api/persona'</span>, <span class="hljs-variable">$scope</span>.newPersona)
-        .success(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-                <span class="hljs-variable">$scope</span>.newPersona = {};
-                <span class="hljs-variable">$scope</span>.personas = data;
-            })
-        .error(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-            console.log(<span class="hljs-string">'Error: '</span> + data);
-        });
-    };
-
-    <span class="hljs-comment">// Función para editar los datos de una persona</span>
-    <span class="hljs-variable">$scope</span>.modificarPersona = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(newPersona)</span> {</span>
-        <span class="hljs-variable">$http</span>.put(<span class="hljs-string">'/api/persona/'</span> + <span class="hljs-variable">$scope</span>.newPersona._id, <span class="hljs-variable">$scope</span>.newPersona)
-        .success(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-                <span class="hljs-variable">$scope</span>.newPersona = {};
-                <span class="hljs-variable">$scope</span>.personas = data;
-                <span class="hljs-variable">$scope</span>.selected = <span class="hljs-keyword">false</span>;
-            })
-        .error(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-            console.log(<span class="hljs-string">'Error: '</span> + data);
-        });
-    };
-
-    <span class="hljs-comment">// Función que borra un objeto persona </span>
-    <span class="hljs-variable">$scope</span>.borrarPersona = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(newPersona)</span> {</span>
-        <span class="hljs-variable">$http</span>.delete(<span class="hljs-string">'/api/persona/'</span> + <span class="hljs-variable">$scope</span>.newPersona._id)
-        .success(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-            <span class="hljs-variable">$scope</span>.newPersona = {};
-            <span class="hljs-variable">$scope</span>.personas = data;
-            <span class="hljs-variable">$scope</span>.selected = <span class="hljs-keyword">false</span>;
-        })
-        .error(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(data)</span> {</span>
-            console.log(<span class="hljs-string">'Error: '</span> + data);
-        });
-    };
-
-    <span class="hljs-comment">// Función para seleccionar el objeto en la tabla</span>
-    <span class="hljs-variable">$scope</span>.selectPerson = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(persona)</span> {</span>
-        <span class="hljs-variable">$scope</span>.newPersona = persona;
-        <span class="hljs-variable">$scope</span>.selected = <span class="hljs-keyword">true</span>;
-        console.log(<span class="hljs-variable">$scope</span>.newPersona, <span class="hljs-variable">$scope</span>.selected);
-    };
-}</code></pre>
-
-<p>Por último se muestran los archivos “index.html”, “login.html” y “tabla.html” que es donde esta AngularJS (esta página tiene los estilos CSS de bootstrap y también archivos “estilos.css” y “login.css”). Lo primero que se hace es cargar las librerías de AngularJS de su página web:</p>
+```
+angular.module('MainApp', [])
 
 
+function mainController($scope, $http) {
+	$scope.newPersona = {};
+	$scope.personas = {};
+	$scope.selected = false;
 
-<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-comment">&lt;!-- Cargamos angular --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+	// Se obtienen todos los datos de la base de datos
+	$http.get('/api/persona').success(function(data) {
+		$scope.personas = data;
+	})
+	.error(function(data) {
+		console.log('Error: ' + data);
+	});
 
-<p>Luego se carga el archivo “core.js” donde están las funciones que harán las llamadas el API:</p>
+	// Función para registrar a una persona
+	$scope.registrarPersona = function() {
+		$http.post('/api/persona', $scope.newPersona)
+		.success(function(data) {
+				$scope.newPersona = {};
+				$scope.personas = data;
+			})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
+
+	// Función para editar los datos de una persona
+	$scope.modificarPersona = function(newPersona) {
+		$http.put('/api/persona/' + $scope.newPersona._id, $scope.newPersona)
+		.success(function(data) {
+				$scope.newPersona = {};
+				$scope.personas = data;
+				$scope.selected = false;
+			})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
+
+	// Función que borra un objeto persona 
+	$scope.borrarPersona = function(newPersona) {
+		$http.delete('/api/persona/' + $scope.newPersona._id)
+		.success(function(data) {
+			$scope.newPersona = {};
+			$scope.personas = data;
+			$scope.selected = false;
+		})
+		.error(function(data) {
+			console.log('Error: ' + data);
+		});
+	};
+
+	// Función para seleccionar el objeto en la tabla
+	$scope.selectPerson = function(persona) {
+		$scope.newPersona = persona;
+		$scope.selected = true;
+		console.log($scope.newPersona, $scope.selected);
+	};
+}
+```
 
 
+Por último se muestran los archivos “index.html”, "login.html" y "tabla.html" que es donde esta AngularJS (esta página tiene los estilos CSS de bootstrap y también archivos "estilos.css" y "login.css"). Lo primero que se hace es cargar las librerías de AngularJS de su página web:
 
-<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-comment">&lt;!-- Cargamos el javascript de angular --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"core.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span></code></pre>
+```
+<!-- Cargamos angular -->
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+```
 
-<p>En el “index.html” esta la etiqueta ng-app=”MainApp” que es el contexto en el se encuadra esta vista. Hay también otras etiquetas como ng-model, ng-repeat, ng-click, ng-disabled.</p>
+Luego se carga el archivo “core.js” donde están las funciones que harán las llamadas el API:
 
-<p>Luego se van a mostrar los datos de la base de datos en una tabla que esta en el archivo “tabla.html”.  En el siguiente código de la tabla, esta la etiqueta “ng-repeat” y se le indica que nos vaya seleccionando un objeto “persona” del array “personas” que tenemos definido en el “core.js”. Una vez que se tiene el objeto “persona” se pone en la tabla accediendo a sus atributos ({{ persona.nombre }}, {{ persona.usuario }},…).  Con la etiqueta “ng-click” ejecutaremos la función “selectPerson(persona)” que esta definida en el “core.js” y que agarra el objeto persona que seleccionemos al pulsar una fila de la tabla para mostrarla en el formulario.</p>
+```
+<!-- Cargamos el javascript de angular -->
+<script src="core.js"></script>
+```
+
+En el “index.html” esta la etiqueta ng-app=”MainApp” que es el contexto en el se encuadra esta vista. Hay también otras etiquetas como ng-model, ng-repeat, ng-click, ng-disabled.
+
+Luego se van a mostrar los datos de la base de datos en una tabla que esta en el archivo "tabla.html".  En el siguiente código de la tabla, esta la etiqueta “ng-repeat” y se le indica que nos vaya seleccionando un objeto “persona” del array “personas” que tenemos definido en el “core.js”. Una vez que se tiene el objeto “persona” se pone en la tabla accediendo a sus atributos ({{ persona.nombre }}, {{ persona.usuario }},…).  Con la etiqueta “ng-click” ejecutaremos la función “selectPerson(persona)” que esta definida en el “core.js” y que agarra el objeto persona que seleccionemos al pulsar una fila de la tabla para mostrarla en el formulario.
+
 
 <table class="table table-striped">
-                    <tbody><tr class="info">
-                        <td class="colum">Nombre</td>
-                        <td class="colum">Usuario</td>
-                        <td class="colum">Email</td>
-                    </tr>
-                    <tr>
-                        <td class="columna">{{ persona.nombre }}</td>
-                        <td class="columna">{{ persona.usuario }}</td>
-                        <td class="columna">{{ persona.email }}</td>
-                    </tr>
-                </tbody></table>
+					<tr class="info">
+						<td class="colum">Nombre</td>
+						<td class="colum">Usuario</td>
+						<td class="colum">Email</td>
+					</tr>
+					<tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+						<td class="columna">{{ persona.nombre }}</td>
+						<td class="columna">{{ persona.usuario }}</td>
+						<td class="columna">{{ persona.email }}</td>
+					</tr>
+				</table>
+
+```
+<table class="table table-striped">
+					<tr class="info">
+						<td class="colum">Nombre</td>
+						<td class="colum">Usuario</td>
+						<td class="colum">Email</td>
+					</tr>
+					<tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+						<td class="columna">{{ persona.nombre }}</td>
+						<td class="columna">{{ persona.usuario }}</td>
+						<td class="columna">{{ persona.email }}</td>
+					</tr>
+				</table>
+```
+
+Así es como esta hecho el formulario y como se hizo una sencilla validación del mismo, impidiendo registrar una persona sino tiene sus campos rellenos o modificarlo y borrarlo sino ha sido seleccionado. En este formulario se definen los “input” y al final de cada input ponemos a que atributo del objeto persona corresponde y al poner “required” indicamos que es un campo obligatorio.
+
+```
+<div class="form-group">
+			<div class="col-sm-10">
+			<input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" class="form-control input-lg text-center" ng-model="newPersona.nombre" required>
+
+			</div>
+
+
+			<div class="col-sm-10">
+			<input type="email" id="email" name="email" placeholder="Email" class="form-control input-lg text-center" ng-model="newPersona.email" required> // si no se escribe un email no se insertara en la tabla
+
+			</div>
+			<div class="col-sm-10">
+			<input type="text" id="usuario" name="usuario" placeholder="Usuario" class="form-control input-lg text-center" ng-model="newPersona.usuario" required>
+
+			</div>
+			<div class="col-sm-10">
+			<input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" class="form-control input-lg text-center" required>
+
+			</div>
+			<div class="col-sm-10">
+			<input type="password" id="confirm_contra" name="confirm_contra" placeholder="Confirmar la contraseña" class="form-control input-lg text-center" required>
+
+			</div>
+```
+
+Después se definen las diferentes acciones del formulario. Dentro de todos los botones definimos las funciones que se tienen que ejecutar tras pulsar el botón con la etiqueta “ng-click“. También se inhabilitarán (poniendo “ng-disabled“) a los botones sino cumplen los requisitos para hacer cada una de las acciones, como que los atributos no sean nulos. 
+
+```
+<!-- Acciones que se pueden realizar en el formulario -->
+<a href="login.html" class="btn btn-primary" ng-click="registrarPersona()" ng-disabled="myForm.$invalid || selected">Registrate</a>
+<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Borrar</button>
+
+```
+
+Al formulario no se le hizo una validación muy exhaustiva pero AngulaJS nos permite validar muchas cosas como que el campo deba ser un email, etc.  Aquí se muestra el código del “index.html”, "login.html" y "tabla.html" 
+
+###index.html
+
+```
+<!doctype html>
+
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Usuarios</title>
+		<!-- Cargamos bootstrap -->
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+		<!-- Cargamos los estilos.css -->
+		<link rel="stylesheet" type="text/css" href="estilos.css">
+	
+	<!-- Cargamos angular -->
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<!-- Cargamos el javascript de angular -->
+	<script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+<h1>Registrate<span class="label label-success"></span></h1>
+	<div class="jumbotron boxlogin">
+	<form action="/" class="form-horizontal">
+		<h2 class="form_titulo">CREA UNA CUENTA</h2>
+		<div class="form-group">
+			<div class="col-sm-10">
+			<input type="text" id="nombre" name="nombre" placeholder="Nombre Completo" class="form-control input-lg text-center" ng-model="newPersona.nombre" required>
+
+			</div>
+
 
+			<div class="col-sm-10">
+			<input type="email" id="email" name="email" placeholder="Email" class="form-control input-lg text-center" ng-model="newPersona.email" required>
 
+			</div>
+			<div class="col-sm-10">
+			<input type="text" id="usuario" name="usuario" placeholder="Usuario" class="form-control input-lg text-center" ng-model="newPersona.usuario" required>
 
-<pre class="prettyprint"><code class=" hljs handlebars"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table-striped"</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"info"</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"colum"</span>&gt;</span>Nombre<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"colum"</span>&gt;</span>Usuario<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"colum"</span>&gt;</span>Email<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"persona in personas"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"selectPerson(persona)"</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"columna"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">persona.nombre</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"columna"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">persona.usuario</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"columna"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">persona.email</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span></span></code></pre>
+			</div>
+			<div class="col-sm-10">
+			<input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" class="form-control input-lg text-center" required>
 
-<p>Así es como esta hecho el formulario y como se hizo una sencilla validación del mismo, impidiendo registrar una persona sino tiene sus campos rellenos o modificarlo y borrarlo sino ha sido seleccionado. En este formulario se definen los “input” y al final de cada input ponemos a que atributo del objeto persona corresponde y al poner “required” indicamos que es un campo obligatorio.</p>
+			</div>
+			<div class="col-sm-10">
+			<input type="password" id="confirm_contra" name="confirm_contra" placeholder="Confirmar la contraseña" class="form-control input-lg text-center" required>
 
+			</div>
+			<div class="col-sm-10">
+			<a href="login.html" class="btn btn-primary" ng-click="registrarPersona()" ng-disabled="myForm.$invalid || selected">Registrate</a>
+			</div>
+		</div>
+		</form>
 
 
-<pre class="prettyprint"><code class=" hljs fsharp">&lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-group"</span>&gt;
-            &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"col-sm-10"</span>&gt;
-            &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"text"</span> id=<span class="hljs-string">"nombre"</span> name=<span class="hljs-string">"nombre"</span> placeholder=<span class="hljs-string">"Nombre Completo"</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-control input-lg text-center"</span> ng-model=<span class="hljs-string">"newPersona.nombre"</span> required&gt;
 
-            &lt;/div&gt;
+		</div>
 
-
-            &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"col-sm-10"</span>&gt;
-            &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"email"</span> id=<span class="hljs-string">"email"</span> name=<span class="hljs-string">"email"</span> placeholder=<span class="hljs-string">"Email"</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-control input-lg text-center"</span> ng-model=<span class="hljs-string">"newPersona.email"</span> required&gt; <span class="hljs-comment">// si no se escribe un email no se insertara en la tabla</span>
-
-            &lt;/div&gt;
-            &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"col-sm-10"</span>&gt;
-            &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"text"</span> id=<span class="hljs-string">"usuario"</span> name=<span class="hljs-string">"usuario"</span> placeholder=<span class="hljs-string">"Usuario"</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-control input-lg text-center"</span> ng-model=<span class="hljs-string">"newPersona.usuario"</span> required&gt;
-
-            &lt;/div&gt;
-            &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"col-sm-10"</span>&gt;
-            &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"password"</span> id=<span class="hljs-string">"contraseña"</span> name=<span class="hljs-string">"contraseña"</span> placeholder=<span class="hljs-string">"Contraseña"</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-control input-lg text-center"</span> required&gt;
-
-            &lt;/div&gt;
-            &lt;div <span class="hljs-keyword">class</span>=<span class="hljs-string">"col-sm-10"</span>&gt;
-            &lt;input <span class="hljs-class"><span class="hljs-keyword">type</span>=</span><span class="hljs-string">"password"</span> id=<span class="hljs-string">"confirm_contra"</span> name=<span class="hljs-string">"confirm_contra"</span> placeholder=<span class="hljs-string">"Confirmar la contraseña"</span> <span class="hljs-keyword">class</span>=<span class="hljs-string">"form-control input-lg text-center"</span> required&gt;
-
-            &lt;/div&gt;</code></pre>
-
-<p>Después se definen las diferentes acciones del formulario. Dentro de todos los botones definimos las funciones que se tienen que ejecutar tras pulsar el botón con la etiqueta “ng-click“. También se inhabilitarán (poniendo “ng-disabled“) a los botones sino cumplen los requisitos para hacer cada una de las acciones, como que los atributos no sean nulos. </p>
-
-
-
-<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-comment">&lt;!-- Acciones que se pueden realizar en el formulario --&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"login.html"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-primary"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"registrarPersona()"</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">"myForm.$invalid || selected"</span>&gt;</span>Registrate<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-warning btn-lg"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"modificarPersona(newPersona)"</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">"!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected"</span>&gt;</span>Modificar<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-danger btn-lg"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"borrarPersona(newPersona)"</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">"!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected"</span>&gt;</span>Borrar<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-</code></pre>
-
-<p>Al formulario no se le hizo una validación muy exhaustiva pero AngulaJS nos permite validar muchas cosas como que el campo deba ser un email, etc.  Aquí se muestra el código del “index.html”, “login.html” y “tabla.html” </p>
-
-
-
-<h3 id="indexhtml">index.html</h3>
-
-
-
-<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
-
-
-<span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">ng-app</span>=<span class="hljs-value">"MainApp"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"utf-8"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"viewport"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"width=device-width, initial-scale=1"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Usuarios<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-        <span class="hljs-comment">&lt;!-- Cargamos bootstrap --&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"</span>&gt;</span>
-        <span class="hljs-comment">&lt;!-- Cargamos los estilos.css --&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"estilos.css"</span>&gt;</span>
-
-    <span class="hljs-comment">&lt;!-- Cargamos angular --&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-
-    <span class="hljs-comment">&lt;!-- Cargamos el javascript de angular --&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"core.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span> <span class="hljs-attribute">ng-controller</span>=<span class="hljs-value">"mainController"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Registrate<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"label label-success"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"jumbotron boxlogin"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">action</span>=<span class="hljs-value">"/"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-horizontal"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">h2</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form_titulo"</span>&gt;</span>CREA UNA CUENTA<span class="hljs-tag">&lt;/<span class="hljs-title">h2</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-group"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-10"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"nombre"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"nombre"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Nombre Completo"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newPersona.nombre"</span> <span class="hljs-attribute">required</span>&gt;</span>
-
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-10"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Email"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newPersona.email"</span> <span class="hljs-attribute">required</span>&gt;</span>
-
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-10"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"usuario"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"usuario"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Usuario"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newPersona.usuario"</span> <span class="hljs-attribute">required</span>&gt;</span>
-
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-10"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"contraseña"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"contraseña"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Contraseña"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">required</span>&gt;</span>
-
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-10"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">id</span>=<span class="hljs-value">"confirm_contra"</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"confirm_contra"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Confirmar la contraseña"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">required</span>&gt;</span>
-
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-10"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"login.html"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-primary"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"registrarPersona()"</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">"myForm.$invalid || selected"</span>&gt;</span>Registrate<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
-
-
-
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
-</code></pre>
-
-
-
-<h3 id="loginhtml">login.html</h3>
-
-
-
-<pre class="prettyprint"><code class=" hljs xml"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">ng-app</span>=<span class="hljs-value">"MainApp"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"utf-8"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"viewport"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"width=device-width, initial-scale=1"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Usuarios<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"login.css"</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"core.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span> <span class="hljs-attribute">ng-controller</span>=<span class="hljs-value">"mainController"</span>&gt;</span>
-
-
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-4 col-sm-offset-1 text-center"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"myForm"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Inicia Sesión<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-group"</span>&gt;</span>
-                        <span class="hljs-comment">&lt;!-- &lt;input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newPersona.nombre" required&gt;
-                        &lt;br&gt;--&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Usuario"</span>  <span class="hljs-attribute">required</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
-                        <span class="hljs-comment">&lt;!--&lt;input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" required&gt;
-                        &lt;br&gt;--&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Contraseña"</span> <span class="hljs-attribute">required</span>&gt;</span>
-
-
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-
-
-
-                    <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"tabla.html"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-success btn-lg"</span> &gt;</span>Inicia Sesión<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>¿No tienes una cuenta? <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"index.html"</span>&gt;</span>Registrate<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-                <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
-</code></pre>
-
-
-
-<h3 id="tablahtml">tabla.html</h3>
-
-
-
-<pre class="prettyprint"><code class=" hljs handlebars"><span class="xml"><span class="hljs-doctype">&lt;!doctype html&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-title">html</span> <span class="hljs-attribute">ng-app</span>=<span class="hljs-value">"MainApp"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">charset</span>=<span class="hljs-value">"utf-8"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">meta</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"viewport"</span> <span class="hljs-attribute">content</span>=<span class="hljs-value">"width=device-width, initial-scale=1"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">title</span>&gt;</span>Usuarios<span class="hljs-tag">&lt;/<span class="hljs-title">title</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"login.css"</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"core.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
-
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span> <span class="hljs-attribute">ng-controller</span>=<span class="hljs-value">"mainController"</span>&gt;</span>
-
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"container"</span>&gt;</span>
-
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"jumbotron text-center"</span> <span class="hljs-attribute">ng-prueba</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Nº de Registros: <span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"label label-success"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">personas.length</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-        <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"row"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-6 col-sm-offset-1"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">table</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"table table-striped"</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"info"</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"colum"</span>&gt;</span>Nombre<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"colum"</span>&gt;</span>Usuario<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"colum"</span>&gt;</span>Email<span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"persona in personas"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"selectPerson(persona)"</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"columna"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">persona.nombre</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"columna"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">persona.usuario</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">td</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"columna"</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">persona.email</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span>
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-
-                            <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"col-sm-4 col-sm-offset-1 text-center"</span>&gt;</span>
-                <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">"myForm"</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-group"</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Nombre"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newPersona.nombre"</span> <span class="hljs-attribute">required</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Usuario"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newPersona.usuario"</span> <span class="hljs-attribute">required</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"form-control input-lg text-center"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Email"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newPersona.email"</span> <span class="hljs-attribute">required</span>&gt;</span>
-                        <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
-                        <span class="hljs-comment">&lt;!--&lt;input type="password" class="form-control input-lg text-center" placeholder="Contraseña"required&gt;--&gt;</span>
-
-
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-
-                    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-warning btn-lg"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"modificarPersona(newPersona)"</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">"!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected"</span>&gt;</span>Modificar<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"submit"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"btn btn-danger btn-lg"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"borrarPersona(newPersona)"</span> <span class="hljs-attribute">ng-disabled</span>=<span class="hljs-value">"!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected"</span>&gt;</span>Borrar<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">br</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Ir a la pàgina de <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"index.html"</span>&gt;</span>registro<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-                    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-                <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
-            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">html</span>&gt;</span>
-</span></code></pre>
-
-
-
-<h3 id="poner-en-funcionamiento-el-proyecto">Poner en funcionamiento el proyecto</h3>
-
-<p><strong>npm install</strong>: Se tiene que ejecutar este comando en la carpeta del proyecto para que se descargue las librerías de express y mongose, o sea, las dependencias del proyecto (si hay algún problema se puede intentar como “sudo”). </p>
-
-
-
-<pre class="prettyprint"><code class=" hljs cmake">npm <span class="hljs-keyword">install</span></code></pre>
-
-<p><strong>node server.js</strong>: En la carpeta del proyecto se tiene que ejecutar este comando. Este comando es para poner a correr el servidor y que el proyecto funcione.</p>
-
-
-
-<pre class="prettyprint"><code class=" hljs axapta">node <span class="hljs-keyword">server</span>.js</code></pre>
-
-<p><strong><a href="http://localhost:3000">http://localhost:3000</a></strong>: Se puede ver la aplicación web yendo al navegador y poniendo la URL de la máquina local donde este el proyecto y el puerto.</p>
-
-
-
-<pre class="prettyprint"><code class=" hljs cs">http:<span class="hljs-comment">//localhost:3000</span></code></pre></div></body>
+</body>
 </html>
+
+```
+
+###login.html
+
+```
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Usuarios</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="login.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+
+	
+			<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form name="myForm">
+				<h1>Inicia Sesión</h1>
+					<div class="form-group">
+						<!-- <input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newPersona.nombre" required>
+						<br>-->
+						<input type="text" class="form-control input-lg text-center" placeholder="Usuario"  required>
+						<br>
+						<!--<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" required>
+						<br>-->
+						<input type="password" class="form-control input-lg text-center" placeholder="Contraseña" required>
+
+
+					</div>
+
+
+					
+
+					<a href="tabla.html" class="btn btn-success btn-lg" >Inicia Sesión</a>
+					<div>
+					<br>
+					<p>¿No tienes una cuenta? <a href="index.html">Registrate</a></p>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+```
+
+
+###tabla.html
+
+```
+<!doctype html>
+
+<html ng-app="MainApp">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Usuarios</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="login.css">
+
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+
+	<script src="core.js"></script>
+
+</head>
+<body ng-controller="mainController">
+
+	<div class="container">
+
+		<div class="jumbotron text-center" ng-prueba>
+			<h1>Nº de Registros: <span class="label label-success">{{ personas.length }}</span></h1>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-6 col-sm-offset-1">
+				<table class="table table-striped">
+					<tr class="info">
+						<td class="colum">Nombre</td>
+						<td class="colum">Usuario</td>
+						<td class="colum">Email</td>
+					</tr>
+					<tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+						<td class="columna">{{ persona.nombre }}</td>
+						<td class="columna">{{ persona.usuario }}</td>
+						<td class="columna">{{ persona.email }}</td>
+					</tr>
+				</table>
+			</div>
+			
+
+							<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form name="myForm">
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newPersona.nombre" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Usuario" ng-model="newPersona.usuario" required>
+						<br>
+						<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" required>
+						<br>
+						<!--<input type="password" class="form-control input-lg text-center" placeholder="Contraseña"required>-->
+
+
+					</div>
+					
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Modificar</button>
+					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Borrar</button>
+					<div>
+					<br>
+					<p>Ir a la pàgina de <a href="index.html">registro</a></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
+```
+
+###Poner en funcionamiento el proyecto
+
+**npm install**: Se tiene que ejecutar este comando en la carpeta del proyecto para que se descargue las librerías de express y mongose, o sea, las dependencias del proyecto (si hay algún problema se puede intentar como “sudo”). 
+
+```
+npm install
+```
+
+**node server.js**: En la carpeta del proyecto se tiene que ejecutar este comando. Este comando es para poner a correr el servidor y que el proyecto funcione.
+
+```
+node server.js
+```
+
+**http://localhost:3000**: Se puede ver la aplicación web yendo al navegador y poniendo la URL de la máquina local donde este el proyecto y el puerto.
+
+```
+http://localhost:3000
+```
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
