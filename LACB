@@ -1,4 +1,13 @@
-<h1 id="aplicación-utilizando-meanmongo-express-angular-node">Aplicación utilizando MEAN(Mongo-Express-Angular-Node)</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hello!</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h1 id="aplicación-utilizando-meanmongo-express-angular-node">Aplicación utilizando MEAN(Mongo-Express-Angular-Node)</h1>
 
 <p>Aquí se muestra como desarrollar una aplicación web con MEAN(Mongo-Express-Angular-Node) </p>
 
@@ -586,4 +595,5 @@ exports.removePersona = <span class="hljs-function"><span class="hljs-keyword">f
 
 
 
-<pre class="prettyprint"><code class=" hljs cs">http:<span class="hljs-comment">//localhost:3000</span></code></pre>
+<pre class="prettyprint"><code class=" hljs cs">http:<span class="hljs-comment">//localhost:3000</span></code></pre></div></body>
+</html>
