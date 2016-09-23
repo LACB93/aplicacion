@@ -47,7 +47,7 @@ Por último tenemos los ficheros “package.json” para ver las dependencias qu
 
 ###Código fuente de los archivos:
 
-Aquí esta el “Package.json” que es la información relacionada con el proyecto y nos da las dependencias que vamos a necesitar para el proyecto. las dependencias que se necesitan son las librerías de **“mongose”** y **“express”**. **“mongose”** nos permitirá definir el modelo de datos que se guardará en MongoDB. También tiene un repositorio de Git. El código de package es el siguiente:
+Aquí esta el “package.json” que es la información relacionada con el proyecto y nos da las dependencias que vamos a necesitar para el proyecto. las dependencias que se necesitan son las librerías de **“mongoose”** y **“express”**. **“mongoose”** nos permitirá definir el modelo de datos que se guardará en MongoDB. También tiene un repositorio de Git. El código de package es el siguiente:
 
 ```
 {
@@ -78,7 +78,7 @@ Aquí esta el “Package.json” que es la información relacionada con el proye
 
 ```
 
-El siguiente archivo es el **“server.js”** en el cual configuraremos el servidor. En el vamos a definir que librereías utilizaremos **(express y mongose)** y el puerto por el que escuchara la aplicación. El puerto definido es el 3000. También esta la conexión a la base de datos Mongo **('mongodb://localhost:27017/usua_reg')**  y cargaremos las rutas de la aplicación en el archivo **(“routes.js”)**.
+El siguiente archivo es el **“server.js”** en el cual configuraremos el servidor. En el vamos a definir que librereías utilizaremos **(express y mongoose)** y el puerto por el que escuchara la aplicación. El puerto definido es el 3000. También esta la conexión a la base de datos Mongo **('mongodb://localhost:27017/usua_reg')**  y cargaremos las rutas de la aplicación en el archivo **(“routes.js”)**.
 
 ```
 var express  = require('express');
