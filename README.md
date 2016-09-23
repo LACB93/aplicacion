@@ -296,7 +296,7 @@ function mainController($scope, $http) {
 ```
 
 
-Por último se muestran los archivos “index.html”, "login.html" y "tabla.html" que es donde esta AngularJS (esta página tiene los estilos CSS de bootstrap y también archivos "estilos.css" y "login.css"). Lo primero que se hace es cargar las librerías de AngularJS de su página web:
+Por último se muestran los archivos “index.html”, "login.html" y "tabla.html" que es donde esta AngularJS (estas páginas tienen los estilos CSS de bootstrap y también archivos "estilos.css" y "login.css"). Lo primero que se hace es cargar las librerías de AngularJS de su página web:
 
 ```
 <!-- Cargamos angular -->
@@ -310,7 +310,7 @@ Luego se carga el archivo “core.js” donde están las funciones que harán la
 <script src="core.js"></script>
 ```
 
-En el “index.html” esta la etiqueta ng-app=”MainApp” que es el contexto en el se encuadra esta vista. Hay también otras etiquetas como ng-model, ng-repeat, ng-click, ng-disabled.
+En el “index.html” esta la etiqueta ng-app=”MainApp”. Hay también otras etiquetas como ng-model, ng-repeat, ng-click, ng-disabled.
 
 Luego se van a mostrar los datos de la base de datos en una tabla que esta en el archivo "tabla.html".  En el siguiente código de la tabla, esta la etiqueta “ng-repeat” y se le indica que nos vaya seleccionando un objeto “persona” del array “personas” que tenemos definido en el “core.js”. Una vez que se tiene el objeto “persona” se pone en la tabla accediendo a sus atributos ({{ persona.nombre }}, {{ persona.usuario }},…).  Con la etiqueta “ng-click” ejecutaremos la función “selectPerson(persona)” que esta definida en el “core.js” y que agarra el objeto persona que seleccionemos al pulsar una fila de la tabla para mostrarla en el formulario.
 
@@ -597,3 +597,5 @@ node server.js
 ```
 http://localhost:3000
 ```
+ 
+
