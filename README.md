@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-# proyecto
-=======
-# aplicacion
+# aplicación
 >>>>>>> abd8b8200dc1696d2d0544dfaf6ef5386c051fdc
 
 
@@ -600,6 +597,3 @@ node server.js
 ```
 http://localhost:3000
 ```
- 
-
-
