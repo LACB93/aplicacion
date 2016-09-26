@@ -18,3 +18,14 @@ p {
 	background: #D4E6F1;
 }
 
+#search {
+	border-radius: 10px;
+	width: 30%;
+
+
+}
+
+#buscador {
+	padding: 10px;
+}
+

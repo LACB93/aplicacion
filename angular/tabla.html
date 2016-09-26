@@ -17,6 +17,10 @@
 <body ng-controller="mainController">
 
 	<div class="container">
+		<div id="buscador" class="right-inner-addon">
+			<i class="glyphicon glyphicon-search"></i>
+			<input type="search" class="form-control"id="search" ng-model="buscar" placeholder="buscar">
+		</div>
 
 		<div class="jumbotron text-center" ng-prueba>
 			<h1>Nº de Registros: <span class="label label-success">{{ personas.length }}</span></h1>
@@ -30,14 +34,14 @@
 						<td class="colum">Usuario</td>
 						<td class="colum">Email</td>
 					</tr>
-					<tr ng-repeat="persona in personas" ng-click="selectPerson(persona)">
+					<tr ng-repeat="persona in personas | filter:buscar | orderBy: nombre" ng-click="selectPerson(persona)">
 						<td class="columna">{{ persona.nombre }}</td>
 						<td class="columna">{{ persona.usuario }}</td>
 						<td class="columna">{{ persona.email }}</td>
 					</tr>
 				</table>
 			</div>
-			
+
 
 							<div class="col-sm-4 col-sm-offset-1 text-center">
 				<form name="myForm">
@@ -52,7 +56,7 @@
 
 
 					</div>
-					
+
 					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Modificar</button>
 					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Borrar</button>
 					<div>
