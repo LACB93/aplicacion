@@ -1,6 +1,7 @@
 <!doctype html>
 
 <html ng-app="MainApp">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,6 +15,7 @@
 	<script src="core.js"></script>
 
 </head>
+
 <body ng-controller="mainController">
 
 	<div class="container">
@@ -29,25 +31,27 @@
 
 			<div class="col-sm-6 col-sm-offset-1">
 				<div id="buscador" class="right-inner-addon">
-			<i class="glyphicon glyphicon-search"></i>
-			<input type="search" class="form-control"id="search" ng-model="buscar" placeholder="buscar">
-		</div>
+					<i class="glyphicon glyphicon-search"></i>
+					<input type="search" class="form-control" id="search" ng-model="buscar" placeholder="buscar">
+				</div>
 				<table class="table table-striped">
 					<tr class="info">
 						<td class="colum">Nombre</td>
 						<td class="colum">Usuario</td>
 						<td class="colum">Email</td>
+						<td class="colum">Ultimo mensaje</td>
 					</tr>
 					<tr ng-repeat="persona in personas | filter:buscar | orderBy: nombre" ng-click="selectPerson(persona)">
 						<td class="columna">{{ persona.nombre }}</td>
 						<td class="columna">{{ persona.usuario }}</td>
 						<td class="columna">{{ persona.email }}</td>
+						<td class="columna">{{ persona.mensaje}}</td>
 					</tr>
 				</table>
 			</div>
 
 
-							<div class="col-sm-4 col-sm-offset-1 text-center">
+			<div class="col-sm-4 col-sm-offset-1 text-center">
 				<form name="myForm">
 					<div class="form-group">
 						<input type="text" class="form-control input-lg text-center" placeholder="Nombre" ng-model="newPersona.nombre" required>
@@ -56,20 +60,26 @@
 						<br>
 						<input type="text" class="form-control input-lg text-center" placeholder="Email" ng-model="newPersona.email" required>
 						<br>
+						<p>Enviar mensaje</p>
+						<input type="text" id="mensaje" name="mensaje" class="form-control input-lg text-center" placeholder="Mensaje" ng-model="newPersona.mensaje" require>
+						<br>
+						<button type="submit" class="btn btn-success" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !newPersona.mensaje || !selected">Enviar</button>
+
 						<!--<input type="password" class="form-control input-lg text-center" placeholder="Contraseña"required>-->
 
 
 					</div>
 
-					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Modificar</button>
+					<button type="submit" class="btn btn-warning btn-lg" ng-click="modificarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !newPersona.mensaje ||">Modificar</button>
 					<button type="submit" class="btn btn-danger btn-lg" ng-click="borrarPersona(newPersona)" ng-disabled="!newPersona.nombre || !newPersona.usuario || !newPersona.email || !selected">Borrar</button>
 					<div>
-					<br>
-					<p>Ir a la pàgina de <a href="index.html">registro</a></p>
+						<br>
+						<p>Ir a la pàgina de <a href="index.html">registro</a></p>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
 </body>
+
 </html>
