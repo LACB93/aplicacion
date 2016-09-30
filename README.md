@@ -1,4 +1,4 @@
-# aplicacion
+# aplicación
 Aplicación utilizando MEAN(Mongo-Express-Angular-Node)
 ===================
 
