@@ -1,4 +1,5 @@
 # aplicación
+
 Aplicación utilizando MEAN(Mongo-Express-Angular-Node)
 ===================
 
@@ -30,7 +31,7 @@ Esta es un aplicación web que consistirá en hacer **CRUD** de objetos "Persona
 
 ![enter image description here](https://lh3.googleusercontent.com/-KzK3opqjHMA/V-QAOOqGKrI/AAAAAAAAAgs/OhZ3Ph7lNDY4XrSEXAFF7akzfOJLo2cGQCLcB/s0/Captura+de+pantalla+2016-09-22+a+las+11.00.40+a.m..png "form login")
 
-![enter image description here](https://lh3.googleusercontent.com/TTFk5Uxa9OTnOdpBa9vKSKx7-lyAkIz-o-V9iaoCWh5BqysOT4NaycgEWXf-Bhx2Fg9MPEiL=s0 "tabla")
+![enter image description here](https://lh3.googleusercontent.com/7soYtEGk-i0PiRWTVZoSqJzz9HzeRNyMoC3qMbyiehGXg4Zzwj8tv948qXrhwzdxX17C5Gd9=s0 "tabla")
 
 
 ----------
@@ -617,6 +618,26 @@ node server.js
 http://localhost:3000
 ```
  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
